@@ -18,19 +18,27 @@ Ruby `ruby process.rb --sample` to run the basic case. It should output 'it work
 Analyse the PDF Given in `files/ast_sci_data_tables_sample.pdf`. Data extracted from the two pages in the PDF are in `pages/1.json` and `pages/2.json`. The data is
 arranged in Arrays of hashes with the following key attributes:
 
-  * BlockType: Can be one of `PAGE`, `TABLE`, `LINE`, `WORD`, `TABLE_TITLE` and a bunch of others
+  * BlockType: Can be one of `PAGE`, `TABLE`, `CELL`, `LINE`, `WORD`, `TABLE_TITLE` and a bunch of others
   * Id: Distinct ID per block
   * Text: For the type `WORD`, this field contains the text extracted
   * CellLocation: For the type `CELL`, this contains the location of the cell
   * Children: Array of Ids of blocks that are directly descendent of the current Block
   * Geometry: Location of the text extracted from the PDF
 
+
+It is worth noting that their might be some exploratory scripts required to see how the heirarchy goes. Roughly it should be along the lines of:
+```
+PAGE -> TABLE -> CELL -> WORD
+        TABLE -> TABLE_TITLE
+PAGE -> LINE
+```
+
 There are some attributes that we'd ignore for the purposes of this excersize.
 
 
 ## Task
 
-The purpose is to extract the contents of all the `TABLE`s of all the `PAGE`s and print them out as given in 'solution.png'
+The purpose is to extract the contents of all the `TABLE`s of all the pages and print them out as given in 'solution.png'
 
 ## What we look for
 
